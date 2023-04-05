@@ -1,24 +1,14 @@
 from PIL import Image
 import cv2
+import os
 
-'''
-def foo():
-    res = yield 5;
-    print(res);
+SIZE = {
+    'iphone5': (1136,640)
+}
 
-res = foo();
-print(next(res))
-print(next(res));
-# print(next(res))
-
-'''
-
-def xrange_100(n):
-    while n<100:
-        n+=1;
-        yield n;
-
-
-for i in xrange_100(1):
-    print(i)
-
+for e in os.listdir('pic'):
+    if e.endswith(('png','jpg')):
+        path  = f'pic/{e}'
+        image = Image.open(path)
+        image = image.resize(SIZE['iphone5'])
+        image.save(path)
