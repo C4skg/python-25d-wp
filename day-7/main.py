@@ -75,5 +75,5 @@ def fileFuzz(file:str):
     return True;
 
     
-def dirFuzz(dirs:str):
-    absPath = os.path.abspath(dirs)
+# def dirFuzz(dirs:str):
+    # absPath = os.path.abspath(dirs)
