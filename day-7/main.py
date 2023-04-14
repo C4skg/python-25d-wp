@@ -1,5 +1,7 @@
+from genericpath import isdir, isfile
 import os
 import re
+from time import time
 accept = {
     '.py':{
         'desc': r'[^\\+](\#.*)'
@@ -74,6 +76,20 @@ def fileFuzz(file:str):
         total.time[fileType]['normal'] += 1;
     return True;
 
-    
-# def dirFuzz(dirs:str):
-    # absPath = os.path.abspath(dirs)
+
+def dirFuzz(dirs:str):
+    absPath = os.path.abspath(dirs)
+    if os.path.isfile(absPath):
+        fileFuzz(absPath);
+    elif os.path.isdir(absPath):
+        for e in os.listdir(absPath):
+            e = os.path.join(absPath,e);
+            if os.path.isfile(e):
+                fileFuzz(e);
+            elif os.path.isdir(e):
+                dirFuzz(e);
+
+
+if __name__ == '__main__':
+    dirFuzz(T_dir);
+    print(total.time)
